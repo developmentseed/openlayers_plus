@@ -1,0 +1,95 @@
+<?php
+
+/**
+ * Implementation of hook_block().
+ */
+function openlayers_plus_block($op, $delta = 0) {
+  switch ($op) {
+    case 'list':
+      $blocks = array('blockswitcher' => array('info' => t('OL+ Blockswitcher')));
+      return $blocks;
+    case 'view':
+      switch ($delta) {
+        case 'blockswitcher':
+          return array(
+            'subject' => t('Map layers'),
+            'content' => theme('openlayers_plus_blockswitcher')
+          );
+      }
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function openlayers_plus_theme() {
+  return array(
+    'openlayers_plus_blockswitcher' => array(
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'openlayers_plus') . '/theme',
+      'template' => 'openlayers-plus-blockswitcher',
+      'file' => 'theme.inc',
+    ),
+    'openlayers_plus_legend' => array(
+      'arguments' => array('legend' => array(), 'layer' => ''),
+      'path' => drupal_get_path('module', 'openlayers_plus') . '/theme',
+      'template' => 'openlayers-plus-legend',
+      'file' => 'theme.inc',
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_openlayers_behaviors().
+ *
+ * This is a ctools plugins hook.
+ */
+function openlayers_plus_openlayers_behaviors() {
+  return array(
+    'openlayers_plus_behavior_blockswitcher' => array(
+      'title' => t('OL+: Blockswitcher'),
+      'behavior' => array(
+        'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
+        'file' => 'openlayers_plus_behavior_blockswitcher.inc',
+        'class' => 'openlayers_plus_behavior_blockswitcher',
+        'parent' => 'openlayers_behavior',
+      ),
+    ),
+    'openlayers_plus_behavior_legend' => array(
+      'title' => t('OL+: Map legend'),
+      'behavior' => array(
+        'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
+        'file' => 'openlayers_plus_behavior_legend.inc',
+        'class' => 'openlayers_plus_behavior_legend',
+        'parent' => 'openlayers_behavior',
+      ),
+    ),
+    'openlayers_plus_behavior_permalink' => array(
+      'title' => t('OL+: Permalink'),
+      'behavior' => array(
+        'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
+        'file' => 'openlayers_plus_behavior_permalink.inc',
+        'class' => 'openlayers_plus_behavior_permalink',
+        'parent' => 'openlayers_behavior',
+      ),
+    ),
+    'openlayers_plus_behavior_scalepoints' => array(
+      'title' => t('OL+: Scalepoints'),
+      'behavior' => array(
+        'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
+        'file' => 'openlayers_plus_behavior_scalepoints.inc',
+        'class' => 'openlayers_plus_behavior_scalepoints',
+        'parent' => 'openlayers_behavior',
+      ),
+    ),
+    'openlayers_plus_behavior_tooltips' => array(
+      'title' => t('OL+: Tooltips'),
+      'behavior' => array(
+        'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
+        'file' => 'openlayers_plus_behavior_tooltips.inc',
+        'class' => 'openlayers_plus_behavior_tooltips',
+        'parent' => 'openlayers_behavior',
+      ),
+    ),
+  );
+}

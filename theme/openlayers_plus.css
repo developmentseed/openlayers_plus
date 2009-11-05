@@ -1,0 +1,31 @@
+
+/**
+ * Blockswitcher ======================================================
+ */
+.openlayers-blockswitcher span.key {
+  display:block;
+  float:left;
+  height:20px;
+  width:20px;
+  margin-right:5px;
+  }
+
+.openlayers-blockswitcher input.form-radio,
+.openlayers-blockswitcher input.form-checkbox { margin-right:5px; }
+
+div.openlayers-map #block-openlayers_plus-blockswitcher {
+  position:absolute;
+  right:0px;
+  bottom:0px;
+  z-index:3000;
+  background:#fff;
+  width:auto;
+  }
+
+  div.openlayers-map #block-openlayers_plus-blockswitcher.ne { top:0px; right:0px; }
+  div.openlayers-map #block-openlayers_plus-blockswitcher.nw { top:0px; left:0px; }
+  div.openlayers-map #block-openlayers_plus-blockswitcher.se { bottom:0px; right:0px; }
+  div.openlayers-map #block-openlayers_plus-blockswitcher.sw { bottom:0px; left:0px; }
+
+div.openlayers-map #block-openlayers_plus-blockswitcher h2.block-title { cursor:pointer; }
+div.openlayers-map #block-openlayers_plus-blockswitcher div.block-content { display:none; }
