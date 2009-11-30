@@ -31,7 +31,7 @@ function openlayers_plus_theme() {
       'file' => 'theme.inc',
     ),
     'openlayers_plus_legend' => array(
-      'arguments' => array('legend' => array(), 'layer' => ''),
+      'arguments' => array('legend' => array(), 'layer' => array()),
       'path' => drupal_get_path('module', 'openlayers_plus') . '/theme',
       'template' => 'openlayers-plus-legend',
       'file' => 'theme.inc',

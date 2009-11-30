@@ -94,27 +94,36 @@ Drupal.OpenLayersPlusBlockswitcher.redraw = function() {
         // Create input element
         var inputType = (baseLayer) ? "radio" : "checkbox";
         var inputElem = $('.factory .'+ inputType, this.blockswitcher).clone();
-        $('input', inputElem)
-          .data('layer', layer)
-          .attr('disabled', !baseLayer && !layer.inRange)
-          .attr('checked', checked);
-
-        // Set key styles
-        if (layer.styleMap && !layer.isBaseLayer) {
-          css = this.styleMapToCSS(layer.styleMap);
-          $('span.key', inputElem).css(css);
-        }
-
-        // Set label text
-        $('label', inputElem).append((layer.title !== undefined) ? layer.title : layer.name);
-
-        // Add click handler
-        $('input', inputElem).click(function() { Drupal.OpenLayersPlusBlockswitcher.layerClick(this); });
 
         // Append to container
         var container = baseLayer ? $('.layers.base', this.blockswitcher) : $('.layers.data', this.blockswitcher);
         container.show();
         $('.layers-content', container).append(inputElem);
+
+        // Set label text
+        $('label', inputElem).append((layer.title !== undefined) ? layer.title : layer.name);
+
+        // Add states and click handler
+        if (baseLayer) {
+          $(inputElem)
+            .click(function() { Drupal.OpenLayersPlusBlockswitcher.layerClick(this); })
+            .data('layer', layer);
+          if (checked) {
+            $(inputElem).addClass('activated');
+          }
+        }
+        else {
+          $('input', inputElem)
+            .click(function() { Drupal.OpenLayersPlusBlockswitcher.layerClick(this); })
+            .data('layer', layer)
+            .attr('disabled', !baseLayer && !layer.inRange)
+            .attr('checked', checked);
+          // Set key styles
+          if (layer.styleMap) {
+            css = this.styleMapToCSS(layer.styleMap);
+            $('span.key', inputElem).css(css);
+          }
+        }
       }
     }
   }
@@ -125,7 +134,9 @@ Drupal.OpenLayersPlusBlockswitcher.redraw = function() {
  */
 Drupal.OpenLayersPlusBlockswitcher.layerClick = function(element) {
   var layer = $(element).data('layer');
-  if (layer.isBaseLayer && $(element).is(':checked')) {
+  if (layer.isBaseLayer) {
+    $('.layers.base .layers-content .activated').removeClass('activated');
+    $(element).addClass('activated');
     layer.map.setBaseLayer(layer);
   }
   else {
