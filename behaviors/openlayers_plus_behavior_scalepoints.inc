@@ -215,16 +215,18 @@ class openlayers_plus_behavior_scalepoints extends openlayers_behavior {
 
         foreach ($layer['features'] as $j => $feature) {
           if ($field && isset($feature['attributes'][$field]) && $count = $feature['attributes'][$field]) {
-            foreach ($weights as $percentile => $weight) {
-              // For layers with only a single value always use the smallest weight
-              if ($count_max === $count_min) {
-                $map['layers'][$k]['features'][$j]['attributes']['weight'] = 1;
-                break;
-              }
+            // For layers with only a single value always use the smallest weight.
+            if ($count_max === $count_min) {
+              $map['layers'][$k]['features'][$j]['attributes']['weight'] = 1;
+            }
+            // Otherwise iterate through to find the right weight.
+            else {
               $calculated = $this->process_weight($count/$max, $this->options['method']);
-              if ($calculated <= $percentile) {
-                $map['layers'][$k]['features'][$j]['attributes']['weight'] = $weight;
-                break;
+              foreach ($weights as $percentile => $weight) {
+                if ($calculated <= $percentile) {
+                  $map['layers'][$k]['features'][$j]['attributes']['weight'] = $weight;
+                  break;
+                }
               }
             }
           }

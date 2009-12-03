@@ -15,8 +15,6 @@
 
 div.openlayers-map #block-openlayers_plus-blockswitcher {
   position:absolute;
-  right:0px;
-  bottom:0px;
   z-index:3000;
   background:#fff;
   width:auto;

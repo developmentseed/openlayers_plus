@@ -18,21 +18,28 @@ Drupal.OpenLayersPlusLegend.attach = function(context) {
           $(context).append("<div class='openlayers-legends'></div>");
         }
         layer.events.register('visibilitychanged', layer, Drupal.OpenLayersPlusLegend.setLegend);
+
+        // Trigger the setLegend() method at attach time. We don't know whether
+        // our behavior is being called after the map has already been drawn.
+        Drupal.OpenLayersPlusLegend.setLegend(layer);
       }
     }
   }
 };
 
 Drupal.OpenLayersPlusLegend.setLegend = function(layer) {
-  var name = layer.object.name;
-  var map = $(layer.object.map.div);
+  // The layer param may vary based on the context from which we are called.
+  layer = layer.object ? layer.object : layer;
+
+  var name = layer.name;
+  var map = $(layer.map.div);
   var data = map.data('openlayers');
   var legend = data.map.behaviors.openlayers_plus_behavior_legend[name];
   var legends = $('div.openlayers-legends', map);
-  if (layer.object.visibility && !$('#openlayers-legend-'+ name, legends).size()) {
+  if (layer.visibility && !$('#openlayers-legend-'+ name, legends).size()) {
     legends.append(legend);
   }
-  else if (!layer.object.visibility) {
+  else if (!layer.visibility) {
     $('#openlayers-legend-'+name, legends).remove();
   }
 };
