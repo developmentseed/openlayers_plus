@@ -13,7 +13,7 @@ Drupal.OpenLayersPlusLegend.attach = function(context) {
     var layer, i;
     for (i in data.openlayers.layers) {
       layer = data.openlayers.layers[i];
-      if (data.map.behaviors.openlayers_plus_behavior_legend[layer.name]) {
+      if (data.map.behaviors.openlayers_plus_behavior_legend[layer.drupalID]) {
         if (!$('div.openlayers-legends', context).size()) {
           $(context).append("<div class='openlayers-legends'></div>");
         }
@@ -31,7 +31,7 @@ Drupal.OpenLayersPlusLegend.setLegend = function(layer) {
   // The layer param may vary based on the context from which we are called.
   layer = layer.object ? layer.object : layer;
 
-  var name = layer.name;
+  var name = layer.drupalID;
   var map = $(layer.map.div);
   var data = map.data('openlayers');
   var legend = data.map.behaviors.openlayers_plus_behavior_legend[name];
