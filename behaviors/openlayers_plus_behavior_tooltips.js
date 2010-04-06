@@ -55,8 +55,8 @@ Drupal.OpenLayersTooltips.click = function(feature) {
     link = $(html).children('a')[0];
   }
   if (link) {
-    var href = link.attr('href');
-    if (Drupal.OpenLayersPermalink.addQuery) {
+    var href = $(link).attr('href');
+    if (Drupal.OpenLayersPermalink && Drupal.OpenLayersPermalink.addQuery) {
       href = Drupal.OpenLayersPermalink.addQuery(href);
     }
     window.location = href;
