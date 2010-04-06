@@ -18,6 +18,9 @@ Drupal.OpenLayersPlusBlockswitcher.attach = function(context) {
   var data = $(context).data('openlayers');
   if (data && data.map.behaviors.openlayers_plus_behavior_blockswitcher) {
     this.map = data.openlayers;
+    this.overlay_style = (data.map.behaviors.openlayers_plus_behavior_blockswitcher.map.overlay_style) ? 
+      data.map.behaviors.openlayers_plus_behavior_blockswitcher.map.overlay_style : 'checkbox';
+    
 
     // If behavior has requested display inside of map, respect it.
     if (data.map.behaviors.openlayers_plus_behavior_blockswitcher.map.enabled == true) {
@@ -92,7 +95,8 @@ Drupal.OpenLayersPlusBlockswitcher.redraw = function() {
         var checked = baseLayer ? (layer === this.map.baseLayer) : layer.getVisibility();
 
         // Create input element
-        var inputType = (baseLayer) ? "radio" : "checkbox";
+        var inputType = (baseLayer) ? "radio" : this.overlay_style;
+        
         var inputElem = $('.factory .'+ inputType, this.blockswitcher).clone();
 
         // Append to container
@@ -113,11 +117,22 @@ Drupal.OpenLayersPlusBlockswitcher.redraw = function() {
           }
         }
         else {
-          $('input', inputElem)
-            .click(function() { Drupal.OpenLayersPlusBlockswitcher.layerClick(this); })
-            .data('layer', layer)
-            .attr('disabled', !baseLayer && !layer.inRange)
-            .attr('checked', checked);
+          if (this.overlay_style == 'checkbox') {
+            $('input', inputElem)
+              .click(function() { Drupal.OpenLayersPlusBlockswitcher.layerClick(this); })
+              .data('layer', layer)
+              .attr('disabled', !baseLayer && !layer.inRange)
+              .attr('checked', checked);
+          }
+          else if(this.overlay_style == 'radio') {
+            $(inputElem)
+              .click(function() { Drupal.OpenLayersPlusBlockswitcher.layerClick(this); })
+              .data('layer', layer)
+              .attr('disabled', !layer.inRange);
+            if (checked) {
+              $(inputElem).addClass('activated');
+            }
+          }
           // Set key styles
           if (layer.styleMap) {
             css = this.styleMapToCSS(layer.styleMap);
@@ -138,6 +153,16 @@ Drupal.OpenLayersPlusBlockswitcher.layerClick = function(element) {
     $('.layers.base .layers-content .activated').removeClass('activated');
     $(element).addClass('activated');
     layer.map.setBaseLayer(layer);
+  }
+  else if (this.overlay_style == 'radio') {
+    $('.layers.data .layers-content .activated').removeClass('activated');
+    $.each(this.map.getLayersBy('isBaseLayer', false),
+      function() {
+        this.setVisibility(false);
+      }
+    );
+    layer.setVisibility(true);
+    $(element).addClass('activated');
   }
   else {
     layer.setVisibility($(element).is(':checked'));

@@ -27,3 +27,15 @@ div.openlayers-map #block-openlayers_plus-blockswitcher {
 
 div.openlayers-map #block-openlayers_plus-blockswitcher h2.block-title { cursor:pointer; }
 div.openlayers-map #block-openlayers_plus-blockswitcher div.block-content { display:none; }
+
+div.openlayers-map #block-openlayers_plus-blockswitcher div.radio {
+  background: url('inactive.png');
+  background-repeat: no-repeat;
+  padding: 3px 0 3px 25px;
+}
+
+div.openlayers-map #block-openlayers_plus-blockswitcher div.activated {
+  background: url('active.png');
+  background-repeat: no-repeat;
+  padding: 3px 0 3px 25px;
+}
