@@ -221,7 +221,7 @@ class openlayers_plus_behavior_scalepoints extends openlayers_behavior {
             }
             // Otherwise iterate through to find the right weight.
             else {
-              $calculated = $this->process_weight($count/$max, $this->options['method']);
+              $calculated = $this->process_weight(($count - $min)/($max - $min), $this->options['method']);
               foreach ($weights as $percentile => $weight) {
                 if ($calculated <= $percentile) {
                   $map['layers'][$k]['features'][$j]['attributes']['weight'] = $weight;
