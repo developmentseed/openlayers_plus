@@ -91,5 +91,14 @@ function openlayers_plus_openlayers_behaviors() {
         'parent' => 'openlayers_behavior',
       ),
     ),
+    'openlayers_plus_behavior_popup' => array(
+      'title' => t('OL+: Popups'),
+      'behavior' => array(
+        'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
+        'file' =>  'openlayers_plus_behavior_popup.inc',
+        'class' => 'openlayers_plus_behavior_popup',
+        'parent' => 'openlayers_behavior',
+      ),
+    ),
   );
 }
