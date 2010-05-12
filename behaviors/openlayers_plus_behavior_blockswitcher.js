@@ -32,7 +32,14 @@ Drupal.OpenLayersPlusBlockswitcher.attach = function(context) {
       });
       $(context).append(block);
     }
+
     this.blockswitcher = $('div.openlayers-blockswitcher');
+
+    // Don't propagate click events to the map
+    // this doesn't catch events that are below the layer list
+    $('div.openlayers-blockswitcher').mousedown(function(evt) {
+      OpenLayers.Event.stop(evt);
+    });
 
     data.openlayers.events.on({
       "addlayer": this.redraw,
@@ -158,7 +165,9 @@ Drupal.OpenLayersPlusBlockswitcher.layerClick = function(element) {
     $('.layers.data .layers-content .activated').removeClass('activated');
     $.each(this.map.getLayersBy('isBaseLayer', false),
       function() {
-        this.setVisibility(false);
+        if(this.CLASS_NAME !== 'OpenLayers.Layer.Vector.RootContainer') {
+          this.setVisibility(false);
+        }
       }
     );
     layer.setVisibility(true);
