@@ -9,6 +9,7 @@ class openlayers_plus_behavior_scalepoints extends openlayers_behavior {
     $options['min'] = array('pointRadius' => 5, 'value' => 0);
     $options['max'] = array('pointRadius' => 20, 'value' => '');
     $options['distinct'] = 5;
+    $options['min_label'] = -1;
     $options['method'] = 'area';
     // @TODO: This sucks. Get a submission/validation handling into the behaviors base class and fix this.
     $options['fields'] = array('count, weight');
@@ -100,6 +101,15 @@ class openlayers_plus_behavior_scalepoints extends openlayers_behavior {
       '#type' => 'textfield',
       '#default_value' => $this->options['fields'],
     );
+    $form['min_label'] = array(
+      '#tree' => TRUE,
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#type' => 'textfield',
+      '#title' => t('Minimum weight point to label'),
+      '#default_value' => $this->options['min_label'],
+      '#description' => t('Don\'t show labels below a certain point weight'),
+    );
     return $form;
   }
 
@@ -132,6 +142,9 @@ class openlayers_plus_behavior_scalepoints extends openlayers_behavior {
         $pointdiff = number_format($pointdiff, 2);
         foreach ($weights as $weight) {
           $styles[$weight][$key] = $this->options['min'][$key] + ($weight - 1) * $pointdiff;
+          if ($weight <= $this->options['min_label']) {
+            $styles[$weight]['label'] = '';
+          }
         }
         $styles[$this->options['distinct']][$key] = $this->options['max'][$key];
       }
