@@ -21,6 +21,11 @@ class openlayers_plus_behavior_blockswitcher extends openlayers_behavior {
       '#title' => t('Show blockswitcher in map'),
       '#default_value' => $this->options['map']['enabled'],
     );
+    $form['map']['open'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Show blockswitcher open when the map loads'),
+      '#default_value' => $this->options['map']['open'],
+    );
     $form['map']['overlay_style'] = array(
       '#type' => 'select',
       '#title' => t('Show overlay layers as checkboxes or radio buttons'),

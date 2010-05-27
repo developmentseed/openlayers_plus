@@ -30,6 +30,11 @@ Drupal.OpenLayersPlusBlockswitcher.attach = function(context) {
         $(this).parents('div.block').toggleClass('expanded');
         $(this).siblings('div.block-content').toggle();
       });
+
+      if (data.map.behaviors.openlayers_plus_behavior_blockswitcher.map.open == true) {
+        $('h2.block-title', block).click();
+      }
+
       $(context).append(block);
     }
 
