@@ -31,11 +31,11 @@ Drupal.OpenLayersPlusBlockswitcher.attach = function(context) {
         $(this).siblings('div.block-content').toggle();
       });
 
+      $(context).append(block);
+
       if (data.map.behaviors.openlayers_plus_behavior_blockswitcher.map.open == true) {
         $('h2.block-title', block).click();
       }
-
-      $(context).append(block);
     }
 
     this.blockswitcher = $('div.openlayers-blockswitcher');
