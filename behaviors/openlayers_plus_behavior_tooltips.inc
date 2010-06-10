@@ -1,7 +1,25 @@
 <?php
 
 class openlayers_plus_behavior_tooltips extends openlayers_behavior {
-  function options_init() { return array(); }
+  /**
+   * Override of options_init().
+   */
+  function options_init() {
+    return array('positioned' => FALSE);
+  }
+
+  /**
+   * Override of options_form().
+   */
+  function options_form() {
+    $form = parent::options_form();
+    $form['positioned'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Position tooltip over feature'),
+      '#default_value' => $this->options['positioned'],
+    );
+    return $form;
+  }
 
   /**
    * Render.

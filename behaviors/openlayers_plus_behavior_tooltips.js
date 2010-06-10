@@ -10,6 +10,11 @@ Drupal.OpenLayersTooltips = {};
 Drupal.OpenLayersTooltips.attach = function(context) {
   var data = $(context).data('openlayers');
   if (data && data.map.behaviors.openlayers_plus_behavior_tooltips) {
+    // Options
+    var select_method = 'select';
+    if (data.map.behaviors.openlayers_plus_behavior_tooltips.positioned) {
+      select_method = 'positionedSelect';
+    }
     // Collect vector layers
     var vector_layers = [];
     for (var key in data.openlayers.layers) {
@@ -28,7 +33,7 @@ Drupal.OpenLayersTooltips.attach = function(context) {
       hover: true,
       callbacks: {
         'click': Drupal.OpenLayersTooltips.click,
-        'over': Drupal.OpenLayersTooltips.select,
+        'over': Drupal.OpenLayersTooltips[select_method],
         'out': Drupal.OpenLayersTooltips.unselect
       }
     });
@@ -65,7 +70,7 @@ Drupal.OpenLayersTooltips.click = function(feature) {
   return;
 };
 
-Drupal.OpenLayersTooltips.select = function(feature) {
+Drupal.OpenLayersTooltips.getToolTip = function(feature) {
   var text = "<div class='openlayers-tooltip'>";
   if (feature.attributes.name) {
     text += "<div class='openlayers-tooltip-name'>" + feature.attributes.name + "</div>";
@@ -74,7 +79,20 @@ Drupal.OpenLayersTooltips.select = function(feature) {
     text += "<div class='openlayers-tooltip-description'>" + feature.attributes.description + "</div>";
   }
   text += "</div>";
-  $(feature.layer.map.div).append(text);
+  return $(text);
+}
+
+Drupal.OpenLayersTooltips.select = function(feature) {
+  var tooltip = Drupal.OpenLayersTooltips.getToolTip(feature);
+  $(feature.layer.map.div).append(tooltip);
+};
+
+Drupal.OpenLayersTooltips.positionedSelect = function(feature) {
+  var tooltip = Drupal.OpenLayersTooltips.getToolTip(feature);
+  var point  = new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y);
+  var offset = feature.layer.getViewPortPxFromLonLat(point);
+  $(tooltip).css({zIndex: '1000', position: 'absolute', left: offset.x, top: offset.y});
+  $(feature.layer.map.div).css({position:'relative'}).append(tooltip);
 };
 
 Drupal.OpenLayersTooltips.unselect = function(feature) {
