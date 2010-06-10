@@ -212,8 +212,12 @@ class openlayers_plus_behavior_scalepoints extends openlayers_behavior {
         $count_min = 1000000;
         $count_max = 0;
         if ($get_min || $get_max) {
-          foreach ($layer['features'] as $feature) {
+          foreach ($layer['features'] as $j => $feature) {
             if ($field && isset($feature['attributes'][$field]) && $count = $feature['attributes'][$field]) {
+              // Replace the count attribute with the selected one.
+              if ($field !== 'count') {
+                $map['layers'][$k]['features'][$j]['attributes']['count'] = $count;
+              }
               $max = ($count > $max) && $get_max ? $count : $max;
               $min = ($count < $min) && $get_min ? $count : $min;
               $count_max = ($count > $count_max) ? $count : $count_max;
