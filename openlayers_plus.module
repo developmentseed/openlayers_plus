@@ -30,6 +30,12 @@ function openlayers_plus_theme() {
       'template' => 'openlayers-plus-blockswitcher',
       'file' => 'theme.inc',
     ),
+    'openlayers_plus_blocktoggle' => array(
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'openlayers_plus') . '/theme',
+      'template' => 'openlayers-plus-blocktoggle',
+      'file' => 'theme.inc',
+    ),
     'openlayers_plus_legend' => array(
       'arguments' => array('legend' => array(), 'layer' => array(), 'layer_id' => array()),
       'path' => drupal_get_path('module', 'openlayers_plus') . '/theme',
@@ -52,6 +58,15 @@ function openlayers_plus_openlayers_behaviors() {
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_blockswitcher.inc',
         'class' => 'openlayers_plus_behavior_blockswitcher',
+        'parent' => 'openlayers_behavior',
+      ),
+    ),
+    'openlayers_plus_behavior_blocktoggle' => array(
+      'title' => t('OL+: Blocktoggle'),
+      'behavior' => array(
+        'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
+        'file' => 'openlayers_plus_behavior_blocktoggle.inc',
+        'class' => 'openlayers_plus_behavior_blocktoggle',
         'parent' => 'openlayers_behavior',
       ),
     ),
