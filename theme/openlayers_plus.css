@@ -1,3 +1,26 @@
+/**
+ * Legend =============================================================
+ */
+.openlayers-legends {
+  position:absolute;
+  left:5px;
+  bottom:5px;
+  z-index:3000;
+  }
+
+.openlayers-legends .legend {
+  background:#fff;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  }
+
+.openlayers-legends .swatch {
+  float:left;
+  display:block;
+  width:15px;
+  height:15px;
+  margin-right:5px;
+  }
 
 /**
  * Blockswitcher ======================================================
