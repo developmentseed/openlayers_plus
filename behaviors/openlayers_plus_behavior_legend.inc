@@ -14,7 +14,7 @@ class openlayers_plus_behavior_legend extends openlayers_behavior {
         $options[$layer] = theme('openlayers_plus_legend', $layer_data['options']['legend'], $layer_data, $layer);
       }
       elseif (isset($layer_data['options']['legend'])) {
-        $options[$layer] = $layer_data['options']['legend'];
+        $options[$layer] = theme('openlayers_plus_legend_raw', $layer_data['options']['legend'], $layer_data, $layer);
       }
     }
     return $options;

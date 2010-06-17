@@ -21,19 +21,21 @@ class openlayers_plus_behavior_blocktoggle extends openlayers_behavior {
       '#title' => t('Show blocktoggle in map'),
       '#default_value' => $this->options['map']['enabled'],
     );
-    $form['map']['open'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Show blockswitcher open when the map loads'),
-      '#default_value' => $this->options['map']['open'],
-    );
-    $form['map']['overlay_style'] = array(
+
+    $form['layer']['a'] = array(
       '#type' => 'select',
-      '#title' => t('Show overlay layers as checkboxes or radio buttons'),
-      '#options' => array(
-        'checkbox' => t('Checkboxes'),
-        'radio' => t('Radio Buttons')),
-      '#default_value' => $this->options['map']['overlay_style'],
+      '#options' => $this->map['layers'],
+      '#description' => t('Select layer A'),
+      '#default_value' => isset($this->options['layer']['a']) ? $this->options['layer']['a'] : NULL
     );
+
+    $form['layer']['b'] = array(
+      '#type' => 'select',
+      '#options' => $this->map['layers'],
+      '#description' => t('Select layer B'),
+      '#default_value' => isset($this->options['layer']['b']) ? $this->options['layer']['b'] : NULL
+    );
+
     $form['map']['position'] = array(
       '#type' => 'select',
       '#title' => t('Position'),

@@ -62,3 +62,66 @@ div.openlayers-map #block-openlayers_plus-blockswitcher div.activated {
   background-repeat: no-repeat;
   padding: 3px 0 3px 25px;
 }
+
+div.openlayers-map #block-openlayers_plus-blocktoggle {
+  position:absolute;
+  z-index:3000;
+  background:transparent;
+  width:auto;
+  padding: 0;
+  border: 1px solid #ddd;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  }
+  
+div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-a {
+  -moz-border-radius: 3px 0 0 3px;
+  -webkit-border-radius: 3px 0 0 3px;
+}
+div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-b {
+  -moz-border-radius: 0 3px 3px 0;
+  -webkit-border-radius: 0 3px 3px 0;
+}
+
+
+
+  div.openlayers-map #block-openlayers_plus-blocktoggle.ne { top:0px; right:0px; }
+  div.openlayers-map #block-openlayers_plus-blocktoggle.nw { top:0px; left:0px; }
+  div.openlayers-map #block-openlayers_plus-blocktoggle.se { bottom:0px; right:0px; }
+  div.openlayers-map #block-openlayers_plus-blocktoggle.sw { bottom:0px; left:0px; }
+
+
+div.openlayers-map #block-openlayers_plus-blocktoggle h2.block-title {
+  display: none;
+}
+div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-a {
+  float: left;
+  background: url('point-button.png') #eee no-repeat;
+  background-position: 5px 4px;
+  padding: 4px 2px 0px 30px;
+  height: 25px;
+  width: 50px;
+  color: #444;
+}
+
+div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-a.activated {
+  background: url('point-button.png') #fff no-repeat;
+  color: #403E3C;
+  background-position: 5px 4px;
+}
+
+div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-b {
+  float: left;
+  background: url('point-choro.png') #eee no-repeat;
+  color: #444;
+  background-position: 5px 4px;
+  padding: 4px 2px 0px 30px;
+  height: 25px;
+  width: 50px;
+}
+
+div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-b.activated {
+  background: url('point-choro.png') #fff no-repeat;
+  color: #403E3C;
+  background-position: 5px 4px;
+}

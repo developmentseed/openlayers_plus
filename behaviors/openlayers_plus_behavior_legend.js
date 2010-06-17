@@ -36,7 +36,7 @@ Drupal.OpenLayersPlusLegend.setLegend = function(layer) {
   var data = map.data('openlayers');
   var legend = data.map.behaviors.openlayers_plus_behavior_legend[name];
   var legends = $('div.openlayers-legends', map);
-  if (layer.visibility && !$('#openlayers-legend-'+ name, legends).size()) {
+  if (layer.visibility && $('#openlayers-legend-'+ name, legends).size() === 0) {
     legends.append(legend);
   }
   else if (!layer.visibility) {

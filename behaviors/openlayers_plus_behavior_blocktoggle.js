@@ -18,33 +18,43 @@ Drupal.OpenLayersPlusBlocktoggle.attach = function(context) {
   var data = $(context).data('openlayers');
   if (data && data.map.behaviors.openlayers_plus_behavior_blocktoggle) {
     this.map = data.openlayers;
-    this.overlay_style = (data.map.behaviors.openlayers_plus_behavior_blocktoggle.map.overlay_style) ? 
-      data.map.behaviors.openlayers_plus_behavior_blocktoggle.map.overlay_style : 'checkbox';
-    
+    this.layer_a = this.map.getLayersBy('drupalID', 
+      data.map.behaviors.openlayers_plus_behavior_blocktoggle.layer.a)[0]; 
+    this.layer_b = this.map.getLayersBy('drupalID', 
+      data.map.behaviors.openlayers_plus_behavior_blocktoggle.layer.b)[0]; 
 
     // If behavior has requested display inside of map, respect it.
     if (data.map.behaviors.openlayers_plus_behavior_blocktoggle.map.enabled == true) {
       var block = $(data.map.behaviors.openlayers_plus_behavior_blocktoggle.block);
+
       block.addClass(data.map.behaviors.openlayers_plus_behavior_blocktoggle.map.position);
-      $('h2.block-title', block).click(function() {
-        $(this).parents('div.block').toggleClass('expanded');
-        $(this).siblings('div.block-content').toggle();
-      });
-
       $(context).append(block);
-
-      if (data.map.behaviors.openlayers_plus_behavior_blocktoggle.map.open == true) {
-        $('h2.block-title', block).click();
-      }
     }
 
     this.blocktoggle = $('div.openlayers-blocktoggle');
+    this.blocktoggle.data('layer_a', this.layer_a);
+    this.blocktoggle.data('layer_b', this.layer_b);
 
     // Don't propagate click events to the map
     // this doesn't catch events that are below the layer list
-    $('div.openlayers-blocktoggle').mousedown(function(evt) {
+    $('div.openlayers-blocktoggle *').mousedown(function(evt) {
       OpenLayers.Event.stop(evt);
     });
+
+    $('div.openlayers-blocktoggle').toggle(
+      function() {
+        $(this).data('layer_a').setVisibility(false);
+        $(this).data('layer_b').setVisibility(true);
+        $(this).find('.openlayers-blocktoggle-a').removeClass('activated');
+        $(this).find('.openlayers-blocktoggle-b').addClass('activated');
+      },
+      function() {
+        $(this).data('layer_b').setVisibility(false);
+        $(this).data('layer_a').setVisibility(true);
+        $(this).find('.openlayers-blocktoggle-b').removeClass('activated');
+        $(this).find('.openlayers-blocktoggle-a').addClass('activated');
+      }
+    );
 
     data.openlayers.events.on({
       "addlayer": this.redraw,
@@ -82,12 +92,7 @@ Drupal.OpenLayersPlusBlocktoggle.needsRedraw = function() {
 Drupal.OpenLayersPlusBlocktoggle.redraw = function() {
   if (this.needsRedraw()) {
     // Clear out previous layers
-    $('.layers.base .layers-content div', this.blocktoggle).remove();
-    $('.layers.data .layers-content div', this.blocktoggle).remove();
-    $('.layers.base', this.blocktoggle).hide();
-    $('.layers.data', this.blocktoggle).hide();
-
-    // Save state -- for checking layer if the map state changed.
+     // Save state -- for checking layer if the map state changed.
     // We save this before redrawing, because in the process of redrawing
     // we will trigger more visibility changes, and we want to not redraw
     // and enter an infinite loop.
@@ -104,108 +109,17 @@ Drupal.OpenLayersPlusBlocktoggle.redraw = function() {
       var baseLayer = layer.isBaseLayer;
       if (layer.displayInLayerSwitcher) {
         // Only check a baselayer if it is *the* baselayer, check data layers if they are visible
-        var checked = baseLayer ? (layer === this.map.baseLayer) : layer.getVisibility();
-
-        // Create input element
-        var inputType = (baseLayer) ? "radio" : this.overlay_style;
-        
-        var inputElem = $('.factory .'+ inputType, this.blocktoggle).clone();
-
         // Append to container
-        var container = baseLayer ? $('.layers.base', this.blocktoggle) : $('.layers.data', this.blocktoggle);
-        container.show();
-        $('.layers-content', container).append(inputElem);
-
-        // Set label text
-        $('label', inputElem).append((layer.title !== undefined) ? layer.title : layer.name);
-
-        // Add states and click handler
-        if (baseLayer) {
-          $(inputElem)
-            .click(function() { Drupal.OpenLayersPlusBlocktoggle.layerClick(this); })
-            .data('layer', layer);
-          if (checked) {
-            $(inputElem).addClass('activated');
-          }
+        /*
+        $(inputElem)
+          .click(function() { Drupal.OpenLayersPlusBlocktoggle.layerClick(this); })
+          .data('layer', layer)
+          .attr('disabled', !layer.inRange);
+        if (checked) {
+          $(inputElem).addClass('activated');
         }
-        else {
-          if (this.overlay_style == 'checkbox') {
-            $('input', inputElem)
-              .click(function() { Drupal.OpenLayersPlusBlocktoggle.layerClick(this); })
-              .data('layer', layer)
-              .attr('disabled', !baseLayer && !layer.inRange)
-              .attr('checked', checked);
-          }
-          else if(this.overlay_style == 'radio') {
-            $(inputElem)
-              .click(function() { Drupal.OpenLayersPlusBlocktoggle.layerClick(this); })
-              .data('layer', layer)
-              .attr('disabled', !layer.inRange);
-            if (checked) {
-              $(inputElem).addClass('activated');
-            }
-          }
-          // Set key styles
-          if (layer.styleMap) {
-            css = this.styleMapToCSS(layer.styleMap);
-            $('span.key', inputElem).css(css);
-          }
+        */
         }
-      }
-    }
+     }
   }
-};
-
-/**
- * Click handler that activates or deactivates a layer.
- */
-Drupal.OpenLayersPlusBlocktoggle.layerClick = function(element) {
-  var layer = $(element).data('layer');
-  if (layer.isBaseLayer) {
-    $('.layers.base .layers-content .activated').removeClass('activated');
-    $(element).addClass('activated');
-    layer.map.setBaseLayer(layer);
-  }
-  else if (this.overlay_style == 'radio') {
-    $('.layers.data .layers-content .activated').removeClass('activated');
-    $.each(this.map.getLayersBy('isBaseLayer', false),
-      function() {
-        if(this.CLASS_NAME !== 'OpenLayers.Layer.Vector.RootContainer') {
-          this.setVisibility(false);
-        }
-      }
-    );
-    layer.setVisibility(true);
-    $(element).addClass('activated');
-  }
-  else {
-    layer.setVisibility($(element).is(':checked'));
-  }
-};
-
-/**
-  * Parameters:
-  * styleMap {OpenLayers.StyleMap}
-  *
-  * Returns:
-  * {Object} An object with css properties and values that can be applied to an element
-  *
-  */
-Drupal.OpenLayersPlusBlocktoggle.styleMapToCSS = function (styleMap) {
-  css = {};
-  default_style = styleMap.styles['default'].defaultStyle;
-  if (default_style.fillColor === 'transparent' && typeof default_style.externalGraphic != 'undefined') {
-    css['background-image'] = 'url('+default_style.externalGraphic+')';
-    css['background-repeat'] = 'no-repeat';
-    css['background-color'] = 'transparent';
-    css.width = default_style.pointRadius * 2;
-    css.height = default_style.pointRadius * 2;
-  }
-  else {
-    css['background-color'] = default_style.fillColor;
-  }
-  if (default_style.strokeWidth > 0) {
-    css['border-color'] = default_style.strokeColor;
-  }
-  return css;
 };
