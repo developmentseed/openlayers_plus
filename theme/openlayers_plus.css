@@ -96,24 +96,25 @@ div.openlayers-map #block-openlayers_plus-blocktoggle h2.block-title {
 }
 div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-a {
   float: left;
-  background: url('point-button.png') #eee no-repeat;
+  background: url('point-button.png') #fff no-repeat;
   background-position: 5px 4px;
   padding: 4px 2px 0px 30px;
+  border-right: 1px solid #ccc;
   height: 25px;
   width: 50px;
   color: #444;
 }
 
 div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-a.activated {
-  background: url('point-button.png') #fff no-repeat;
+  background: url('point-button.png') #eee no-repeat;
   color: #403E3C;
   background-position: 5px 4px;
 }
 
 div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-b {
   float: left;
-  background: url('point-choro.png') #eee no-repeat;
   color: #444;
+  background: url('point-choro.png') #fff no-repeat;
   background-position: 5px 4px;
   padding: 4px 2px 0px 30px;
   height: 25px;
@@ -121,7 +122,7 @@ div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-b 
 }
 
 div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-b.activated {
-  background: url('point-choro.png') #fff no-repeat;
+  background: url('point-choro.png') #eee no-repeat;
   color: #403E3C;
   background-position: 5px 4px;
 }
