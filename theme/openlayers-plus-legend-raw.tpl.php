@@ -7,8 +7,5 @@
  */
 ?>
 <div class='legend legend-count-<?php print count($legend) ?> clear-block' id='openlayers-legend-<?php print $layer_id ?>'>
-  <?php if (!empty($layer['title'])): ?>
-    <h2 class='legend-title'><?php print check_plain($layer['title']) ?></h2>
-  <?php endif; ?>
   <?php print $raw; ?>
 </div>
