@@ -1,4 +1,3 @@
-
 /**
  * Blockswitcher ======================================================
  */
@@ -18,3 +17,11 @@ div.openlayers-map #block-openlayers_plus-blockswitcher.ne { right:auto; left:0p
 div.openlayers-map #block-openlayers_plus-blockswitcher.nw { left:auto; right:0px; }
 div.openlayers-map #block-openlayers_plus-blockswitcher.se { right:auto; left:0px; }
 div.openlayers-map #block-openlayers_plus-blockswitcher.sw { left:auto; right:0px; }
+
+/**
+ * Blocktoggle ========================================================
+ */
+div.openlayers-map #block-openlayers_plus-blocktoggle.ne { right:auto; left:0px; }
+div.openlayers-map #block-openlayers_plus-blocktoggle.nw { left:auto; right:0px; }
+div.openlayers-map #block-openlayers_plus-blocktoggle.se { right:auto; left:0px; }
+div.openlayers-map #block-openlayers_plus-blocktoggle.sw { left:auto; right:0px; }
