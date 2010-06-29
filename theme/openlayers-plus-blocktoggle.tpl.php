@@ -1,15 +1,13 @@
 <?php
 // $Id$
 /**
- * @param $points points text
- * @param $shading shading text
+ * @param $a_label first layer text
+ * @param $b_label second layer text
  */
 ?>
 <div class='openlayers-blocktoggle clear-block'>
   <div class='openlayers-blocktoggle-a activated'>
-    <?php echo $points; ?>
   </div>
   <div class='openlayers-blocktoggle-b'>
-    <?php echo $shading; ?>
   </div>
 </div>

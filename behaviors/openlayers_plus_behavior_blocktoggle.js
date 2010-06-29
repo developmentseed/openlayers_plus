@@ -16,7 +16,9 @@ Drupal.OpenLayersPlusBlocktoggle.layerStates = [];
  */
 Drupal.OpenLayersPlusBlocktoggle.attach = function(context) {
   var data = $(context).data('openlayers');
+
   if (data && data.map.behaviors.openlayers_plus_behavior_blocktoggle) {
+
     this.map = data.openlayers;
     this.layer_a = this.map.getLayersBy('drupalID', 
       data.map.behaviors.openlayers_plus_behavior_blocktoggle.layer.a)[0]; 
@@ -41,6 +43,14 @@ Drupal.OpenLayersPlusBlocktoggle.attach = function(context) {
       OpenLayers.Event.stop(evt);
     });
 
+    $('.openlayers-blocktoggle-a').text(
+      data.map.behaviors.openlayers_plus_behavior_blocktoggle.layer.a_label
+    );
+
+    $('.openlayers-blocktoggle-b').text(
+      data.map.behaviors.openlayers_plus_behavior_blocktoggle.layer.b_label
+    );
+
     $('div.openlayers-blocktoggle').toggle(
       function() {
         $(this).data('layer_a').setVisibility(false);
@@ -60,7 +70,6 @@ Drupal.OpenLayersPlusBlocktoggle.attach = function(context) {
       "addlayer": this.redraw,
       "changelayer": this.redraw,
       "removelayer": this.redraw,
-      "changebaselayer": this.redraw,
       scope: this
     });
   }
@@ -73,17 +82,12 @@ Drupal.OpenLayersPlusBlocktoggle.attach = function(context) {
  * {Boolean} The layer state changed since the last redraw() call.
  */
 Drupal.OpenLayersPlusBlocktoggle.needsRedraw = function() {
-  if ( !this.layerStates.length || (this.map.layers.length != this.layerStates.length) ) {
-    return true;
-  }
-  for (var i=0, len=this.layerStates.length; i<len; i++) {
-    var layerState = this.layerStates[i];
-    var layer = this.map.layers[i];
-    if ( (layerState.name != layer.name) || (layerState.inRange != layer.inRange) || (layerState.id != layer.id) || (layerState.visibility != layer.visibility) ) {
-      return true;
-    }
-  }
-  return false;
+  return (
+    (this.a_vis == 
+    $(this).find('.openlayers-blocktoggle-a').hasClass('activated')) ? 1 : 0
+    ^
+    (this.b_vis == 
+    $(this).find('.openlayers-blocktoggle-b').hasClass('activated')) ? 1 : 0);
 };
 
 /**
@@ -91,35 +95,13 @@ Drupal.OpenLayersPlusBlocktoggle.needsRedraw = function() {
  */
 Drupal.OpenLayersPlusBlocktoggle.redraw = function() {
   if (this.needsRedraw()) {
+    this.a_vis = this.layer_a.visibility;
+    this.b_vis = this.layer_b.visibility;
     // Clear out previous layers
-     // Save state -- for checking layer if the map state changed.
+    // Save state -- for checking layer if the map state changed.
     // We save this before redrawing, because in the process of redrawing
     // we will trigger more visibility changes, and we want to not redraw
     // and enter an infinite loop.
-    var len = this.map.layers.length;
-    this.layerStates = new Array(len);
-    for (var i = 0; i < len; i++) {
-      var layerState = this.map.layers[i];
-      this.layerStates[i] = {'name': layerState.name, 'visibility': layerState.visibility, 'inRange': layerState.inRange, 'id': layerState.id};
-    }
-
-    var layers = this.map.layers.slice();
-    for (i = 0, len = layers.length; i < len; i++) {
-      var layer = layers[i];
-      var baseLayer = layer.isBaseLayer;
-      if (layer.displayInLayerSwitcher) {
-        // Only check a baselayer if it is *the* baselayer, check data layers if they are visible
-        // Append to container
-        /*
-        $(inputElem)
-          .click(function() { Drupal.OpenLayersPlusBlocktoggle.layerClick(this); })
-          .data('layer', layer)
-          .attr('disabled', !layer.inRange);
-        if (checked) {
-          $(inputElem).addClass('activated');
-        }
-        */
-        }
-     }
+    $('div.openlayers-blocktoggle').click();
   }
 };

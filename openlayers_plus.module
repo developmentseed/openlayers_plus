@@ -36,7 +36,7 @@ function openlayers_plus_theme() {
       'file' => 'theme.inc',
     ),
     'openlayers_plus_blocktoggle' => array(
-      'arguments' => array(),
+      'arguments' => array('a_label' => '', 'b_label' => ''),
       'path' => drupal_get_path('module', 'openlayers_plus') . '/theme',
       'template' => 'openlayers-plus-blocktoggle',
       'file' => 'theme.inc',

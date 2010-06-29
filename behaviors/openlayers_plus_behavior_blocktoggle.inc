@@ -22,17 +22,31 @@ class openlayers_plus_behavior_blocktoggle extends openlayers_behavior {
       '#default_value' => $this->options['map']['enabled'],
     );
 
+    $form['layer']['a_label'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Layer A Label'),
+      '#description' => t('This can either be the name of the layer, or a shorter name you choose.'),
+      '#default_value' => isset($this->options['layer']['a_label']) ? $this->options['layer']['a_label'] : NULL
+    );
+
     $form['layer']['a'] = array(
       '#type' => 'select',
       '#options' => $this->map['layers'],
-      '#description' => t('Select layer A'),
+      '#title' => t('Layer A'),
       '#default_value' => isset($this->options['layer']['a']) ? $this->options['layer']['a'] : NULL
+    );
+
+    $form['layer']['b_label'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Layer B Label'),
+      '#description' => t('This can either be the name of the layer, or a shorter name you choose.'),
+      '#default_value' => isset($this->options['layer']['b_label']) ? $this->options['layer']['b_label'] : NULL
     );
 
     $form['layer']['b'] = array(
       '#type' => 'select',
       '#options' => $this->map['layers'],
-      '#description' => t('Select layer B'),
+      '#title' => t('Layer B'),
       '#default_value' => isset($this->options['layer']['b']) ? $this->options['layer']['b'] : NULL
     );
 
