@@ -26,7 +26,7 @@ Drupal.OpenLayersPlusBlockswitcher.attach = function(context) {
     if (data.map.behaviors.openlayers_plus_behavior_blockswitcher.map.enabled == true) {
       var block = $(data.map.behaviors.openlayers_plus_behavior_blockswitcher.block);
       block.addClass(data.map.behaviors.openlayers_plus_behavior_blockswitcher.map.position);
-      $('h2.block-title', block).click(function() {
+      $('.block-title', block).click(function() {
         $(this).parents('div.block').toggleClass('expanded');
         $(this).siblings('div.block-content').toggle();
       });
@@ -34,7 +34,7 @@ Drupal.OpenLayersPlusBlockswitcher.attach = function(context) {
       $(context).append(block);
 
       if (data.map.behaviors.openlayers_plus_behavior_blockswitcher.map.open == true) {
-        $('h2.block-title', block).click();
+        $('.block-title', block).click();
       }
     }
 
@@ -53,6 +53,8 @@ Drupal.OpenLayersPlusBlockswitcher.attach = function(context) {
       "changebaselayer": this.redraw,
       scope: this
     });
+
+    this.redraw();
   }
 };
 
