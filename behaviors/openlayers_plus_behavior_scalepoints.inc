@@ -99,7 +99,7 @@ class openlayers_plus_behavior_scalepoints extends openlayers_behavior {
       '#title' => t('Fields'),
       '#description' => t('Enter a comma separated list of attribute fields that can be used for scaling points. The first found attribute will be used.'),
       '#type' => 'textfield',
-      '#default_value' => join($this->options['fields'], ','),
+      '#default_value' => $this->options['fields'],
     );
     $form['min_label'] = array(
       '#tree' => TRUE,
