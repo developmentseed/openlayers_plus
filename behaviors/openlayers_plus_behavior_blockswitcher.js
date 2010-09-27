@@ -172,7 +172,8 @@ Drupal.OpenLayersPlusBlockswitcher.layerClick = function(element) {
     $('.layers.data .layers-content .activated').removeClass('activated');
     $.each(this.map.getLayersBy('isBaseLayer', false),
       function() {
-        if(this.CLASS_NAME !== 'OpenLayers.Layer.Vector.RootContainer') {
+        if(this.CLASS_NAME !== 'OpenLayers.Layer.Vector.RootContainer' &&
+           this.displayInLayerSwitcher) {
           this.setVisibility(false);
         }
       }
