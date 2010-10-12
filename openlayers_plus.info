@@ -1,6 +1,14 @@
 ; $Id$
-core = "6.x"
+core = "7.x"
 name = "OpenLayers Plus"
 dependencies[] = "openlayers"
 description = "Additional tools and behaviors for OpenLayers"
 package = "OpenLayers"
+; Behaviors
+behaviors/openlayers_plus_behavior_blockswitcher.inc
+behaviors/openlayers_plus_behavior_blocktoggle.inc
+behaviors/openlayers_plus_behavior_legend.inc
+behaviors/openlayers_plus_behavior_permalink.inc
+behaviors/openlayers_plus_behavior_popup.inc
+behaviors/openlayers_plus_behavior_scalepoints.inc
+behaviors/openlayers_plus_behavior_tooltips.inc
