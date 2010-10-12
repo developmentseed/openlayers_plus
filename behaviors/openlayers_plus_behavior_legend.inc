@@ -11,10 +11,21 @@ class openlayers_plus_behavior_legend extends openlayers_behavior {
     $options = array();
     foreach ($map['layers'] as $layer => $layer_data) {
       if (isset($layer_data['options']['legend']) && is_array($layer_data['options']['legend'])) {
-        $options[$layer] = theme('openlayers_plus_legend', $layer_data['options']['legend'], $layer_data, $layer);
+        $options[$layer] = theme('openlayers_plus_legend', 
+          array(
+            'legend' => $layer_data['options']['legend'], 
+            'layer' => $layer_data, 
+            'layer_id' => $layer
+          )
+        );
       }
       elseif (isset($layer_data['options']['legend'])) {
-        $options[$layer] = theme('openlayers_plus_legend_raw', $layer_data['options']['legend'], $layer_data, $layer);
+        $options[$layer] = theme('openlayers_plus_legend_raw', 
+          array(
+            'legend' => $layer_data['options']['legend'], 
+            'layer' => $layer_data, 
+            'layer_id' => $layer)
+          );
       }
     }
     return $options;
