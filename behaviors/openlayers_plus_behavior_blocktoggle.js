@@ -1,3 +1,4 @@
+(function($) {
 /**
  * Implementation of Drupal behavior.
  */
@@ -105,3 +106,4 @@ Drupal.OpenLayersPlusBlocktoggle.redraw = function() {
     $('div.openlayers-blocktoggle').click();
   }
 };
+})(jQuery);

@@ -1,3 +1,4 @@
+(function($) {
 /**
  * Implementation of Drupal behavior.
  */
@@ -212,3 +213,4 @@ Drupal.OpenLayersPlusBlockswitcher.styleMapToCSS = function (styleMap) {
   }
   return css;
 };
+})(jQuery);

@@ -1,4 +1,6 @@
-Drupal.behaviors.openlayers_plus_behavior_popup = function(context) {
+(function($) {
+Drupal.behaviors.openlayers_plus_behavior_popup = {
+  'attach': function(context, settings) {
   var data = $(context).data('openlayers');
   if (data && data.map.behaviors.openlayers_plus_behavior_popup) {
     // Collect vector layers
@@ -50,6 +52,7 @@ Drupal.behaviors.openlayers_plus_behavior_popup = function(context) {
       Drupal.openlayers_plus_behavior_popup.pager(context, 'prev');
     });
   }
+}
 };
 
 Drupal.openlayers_plus_behavior_popup = {
@@ -154,4 +157,4 @@ Drupal.openlayers_plus_behavior_popup = {
     $('.openlayers-popupbox:not(.popup)', context).fadeOut('fast', function() { $(this).remove(); });
   }
 };
-
+})(jQuery);

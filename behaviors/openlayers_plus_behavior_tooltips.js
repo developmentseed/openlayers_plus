@@ -1,8 +1,11 @@
+(function($) {
 /**
  * Implementation of Drupal behavior.
  */
-Drupal.behaviors.openlayers_plus_behavior_tooltips = function(context) {
-  Drupal.OpenLayersTooltips.attach(context);
+Drupal.behaviors.openlayers_plus_behavior_tooltips = {
+  'attach': function(context, settings) {
+    Drupal.OpenLayersTooltips.attach(context);
+  }
 };
 
 Drupal.OpenLayersTooltips = {};
@@ -98,3 +101,4 @@ Drupal.OpenLayersTooltips.positionedSelect = function(feature) {
 Drupal.OpenLayersTooltips.unselect = function(feature) {
   $(feature.layer.map.div).children('div.openlayers-tooltip').fadeOut('fast', function() { $(this).remove(); });
 };
+})(jQuery);

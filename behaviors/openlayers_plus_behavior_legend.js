@@ -1,8 +1,10 @@
 /**
  * Implementation of Drupal behavior.
  */
-Drupal.behaviors.openlayers_plus_behavior_legend = function(context) {
-  Drupal.OpenLayersPlusLegend.attach(context);
+Drupal.behaviors.openlayers_plus_behavior_legend = {
+  'attach': function(context, settings) {
+    Drupal.OpenLayersPlusLegend.attach(context);
+  }
 };
 
 Drupal.OpenLayersPlusLegend = {};
