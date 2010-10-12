@@ -6,6 +6,6 @@
  * @param $raw raw html for the legend
  */
 ?>
-<div class='legend legend-count-<?php print count($legend) ?> clear-block' id='openlayers-legend-<?php print $layer_id ?>'>
+<div class='legend legend-count-<?php print count($legend) ?> clearfix' id='openlayers-legend-<?php print $layer_id ?>'>
   <?php print $raw; ?>
 </div>

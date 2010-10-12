@@ -1,4 +1,4 @@
-<div class='openlayers-blockswitcher clear-block'>
+<div class='openlayers-blockswitcher clearfix'>
   <div class='layers base'>
     <h2 class='layers-title'><?php print t('Base layers') ?></h2>
     <div class='layers-content'>
