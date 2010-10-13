@@ -1,20 +1,8 @@
-/**
- * Implementation of Drupal behavior.
- */
-Drupal.behaviors.openlayers_plus_behavior_blockswitcher = function(context) {
-  Drupal.OpenLayersPlusBlockswitcher.attach(context);
-};
-
-/**
- * Blockswitcher is **NOT** an OpenLayers control.
- */
-Drupal.OpenLayersPlusBlockswitcher = {};
-Drupal.OpenLayersPlusBlockswitcher.layerStates = [];
-
+var OpenLayersPlusBlockswitcher = {};
 /**
  * Initializes the blockswitcher and attaches to DOM elements.
  */
-Drupal.OpenLayersPlusBlockswitcher.attach = function(context) {
+OpenLayersPlusBlockswitcher.attach = function(context) {
   var data = $(context).data('openlayers');
   if (data && data.map.behaviors.openlayers_plus_behavior_blockswitcher) {
     this.map = data.openlayers;
@@ -64,7 +52,7 @@ Drupal.OpenLayersPlusBlockswitcher.attach = function(context) {
  * Returns:
  * {Boolean} The layer state changed since the last redraw() call.
  */
-Drupal.OpenLayersPlusBlockswitcher.needsRedraw = function() {
+OpenLayersPlusBlockswitcher.needsRedraw = function() {
   if ( !this.layerStates.length || (this.map.layers.length != this.layerStates.length) ) {
     return true;
   }
@@ -81,7 +69,7 @@ Drupal.OpenLayersPlusBlockswitcher.needsRedraw = function() {
 /**
  * Redraws the blockswitcher to reflect the current state of layers.
  */
-Drupal.OpenLayersPlusBlockswitcher.redraw = function() {
+OpenLayersPlusBlockswitcher.redraw = function() {
   if (this.needsRedraw()) {
     // Clear out previous layers
     $('.layers.base .layers-content div', this.blockswitcher).remove();
@@ -124,7 +112,7 @@ Drupal.OpenLayersPlusBlockswitcher.redraw = function() {
         // Add states and click handler
         if (baseLayer) {
           $(inputElem)
-            .click(function() { Drupal.OpenLayersPlusBlockswitcher.layerClick(this); })
+            .click(function() { OpenLayersPlusBlockswitcher.layerClick(this); })
             .data('layer', layer);
           if (checked) {
             $(inputElem).addClass('activated');
@@ -133,14 +121,14 @@ Drupal.OpenLayersPlusBlockswitcher.redraw = function() {
         else {
           if (this.overlay_style == 'checkbox') {
             $('input', inputElem)
-              .click(function() { Drupal.OpenLayersPlusBlockswitcher.layerClick(this); })
+              .click(function() { OpenLayersPlusBlockswitcher.layerClick(this); })
               .data('layer', layer)
               .attr('disabled', !baseLayer && !layer.inRange)
               .attr('checked', checked);
           }
           else if(this.overlay_style == 'radio') {
             $(inputElem)
-              .click(function() { Drupal.OpenLayersPlusBlockswitcher.layerClick(this); })
+              .click(function() { OpenLayersPlusBlockswitcher.layerClick(this); })
               .data('layer', layer)
               .attr('disabled', !layer.inRange);
             if (checked) {
@@ -161,7 +149,7 @@ Drupal.OpenLayersPlusBlockswitcher.redraw = function() {
 /**
  * Click handler that activates or deactivates a layer.
  */
-Drupal.OpenLayersPlusBlockswitcher.layerClick = function(element) {
+OpenLayersPlusBlockswitcher.layerClick = function(element) {
   var layer = $(element).data('layer');
   if (layer.isBaseLayer) {
     $('.layers.base .layers-content .activated').removeClass('activated');
@@ -194,7 +182,7 @@ Drupal.OpenLayersPlusBlockswitcher.layerClick = function(element) {
   * {Object} An object with css properties and values that can be applied to an element
   *
   */
-Drupal.OpenLayersPlusBlockswitcher.styleMapToCSS = function (styleMap) {
+OpenLayersPlusBlockswitcher.styleMapToCSS = function (styleMap) {
   css = {};
   default_style = styleMap.styles['default'].defaultStyle;
   if (default_style.fillColor === 'transparent' && typeof default_style.externalGraphic != 'undefined') {

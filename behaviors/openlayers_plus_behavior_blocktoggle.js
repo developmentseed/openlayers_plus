@@ -1,20 +1,9 @@
-/**
- * Implementation of Drupal behavior.
- */
-Drupal.behaviors.openlayers_plus_behavior_blocktoggle = function(context) {
-  Drupal.OpenLayersPlusBlocktoggle.attach(context);
-};
-
-/**
- * Blocktoggle is **NOT** an OpenLayers control.
- */
-Drupal.OpenLayersPlusBlocktoggle = {};
-Drupal.OpenLayersPlusBlocktoggle.layerStates = [];
+var OpenLayersPlusBlocktoggle = {};
 
 /**
  * Initializes the blocktoggle and attaches to DOM elements.
  */
-Drupal.OpenLayersPlusBlocktoggle.attach = function(context) {
+OpenLayersPlusBlocktoggle.attach = function(context) {
   var data = $(context).data('openlayers');
 
   if (data && data.map.behaviors.openlayers_plus_behavior_blocktoggle) {
@@ -81,7 +70,7 @@ Drupal.OpenLayersPlusBlocktoggle.attach = function(context) {
  * Returns:
  * {Boolean} The layer state changed since the last redraw() call.
  */
-Drupal.OpenLayersPlusBlocktoggle.needsRedraw = function() {
+OpenLayersPlusBlocktoggle.needsRedraw = function() {
   return (
     (this.a_vis == 
     $(this).find('.openlayers-blocktoggle-a').hasClass('activated')) ? 1 : 0
@@ -93,7 +82,7 @@ Drupal.OpenLayersPlusBlocktoggle.needsRedraw = function() {
 /**
  * Redraws the blocktoggle to reflect the current state of layers.
  */
-Drupal.OpenLayersPlusBlocktoggle.redraw = function() {
+OpenLayersPlusBlocktoggle.redraw = function() {
   if (this.needsRedraw()) {
     this.a_vis = this.layer_a.visibility;
     this.b_vis = this.layer_b.visibility;

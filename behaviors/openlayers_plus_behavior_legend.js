@@ -1,13 +1,8 @@
-/**
- * Implementation of Drupal behavior.
- */
-Drupal.behaviors.openlayers_plus_behavior_legend = function(context) {
-  Drupal.OpenLayersPlusLegend.attach(context);
-};
+var OpenLayersPlusLegend = {};
 
-Drupal.OpenLayersPlusLegend = {};
+OpenLayersPlusLegend = {};
 
-Drupal.OpenLayersPlusLegend.attach = function(context) {
+OpenLayersPlusLegend.attach = function(context) {
   var data = $(context).data('openlayers');
   if (data && data.map.behaviors.openlayers_plus_behavior_legend) {
     var layer, i;
@@ -17,17 +12,17 @@ Drupal.OpenLayersPlusLegend.attach = function(context) {
         if (!$('div.openlayers-legends', context).size()) {
           $(context).append("<div class='openlayers-legends'></div>");
         }
-        layer.events.register('visibilitychanged', layer, Drupal.OpenLayersPlusLegend.setLegend);
+        layer.events.register('visibilitychanged', layer, OpenLayersPlusLegend.setLegend);
 
         // Trigger the setLegend() method at attach time. We don't know whether
         // our behavior is being called after the map has already been drawn.
-        Drupal.OpenLayersPlusLegend.setLegend(layer);
+        OpenLayersPlusLegend.setLegend(layer);
       }
     }
   }
 };
 
-Drupal.OpenLayersPlusLegend.setLegend = function(layer) {
+OpenLayersPlusLegend.setLegend = function(layer) {
   // The layer param may vary based on the context from which we are called.
   layer = layer.object ? layer.object : layer;
 

@@ -1,13 +1,6 @@
-/**
- * Implementation of Drupal behavior.
- */
-Drupal.behaviors.openlayers_plus_behavior_permalink = function(context) {
-  Drupal.OpenLayersPermalink.attach(context);
-};
+var OpenLayersPermalink = {};
 
-Drupal.OpenLayersPermalink = {};
-
-Drupal.OpenLayersPermalink.attach = function(context) {
+OpenLayersPermalink.attach = function(context) {
   var data = $(context).data('openlayers');
   if (data && data.map.behaviors.openlayers_plus_behavior_permalink) {
     // Doctor link hrefs.
@@ -16,7 +9,7 @@ Drupal.OpenLayersPermalink.attach = function(context) {
       $(this).click(function() {
         var href = $(this).attr('href');
         if (href.indexOf('#') === -1) {
-          href = Drupal.OpenLayersPermalink.addQuery(href);
+          href = OpenLayersPermalink.addQuery(href);
           $(this).attr('href', href);
         }
       });
@@ -26,7 +19,7 @@ Drupal.OpenLayersPermalink.attach = function(context) {
       $(this).addClass('processed-permalink');
       $(this).submit(function() {
         var action = $(this).attr('action');
-        action = Drupal.OpenLayersPermalink.addQuery(action, '?');
+        action = OpenLayersPermalink.addQuery(action, '?');
         $(this).attr('action', action);
       });
     });
@@ -37,7 +30,7 @@ Drupal.OpenLayersPermalink.attach = function(context) {
   }
 };
 
-Drupal.OpenLayersPermalink.addQuery = function(href, delimiter) {
+OpenLayersPermalink.addQuery = function(href, delimiter) {
   delimiter = delimiter ? delimiter : '#';
   var processed = false;
   $('div.openlayers-map').each(function() {
