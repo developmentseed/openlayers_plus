@@ -36,77 +36,31 @@
 .openlayers-blockswitcher input.form-radio,
 .openlayers-blockswitcher input.form-checkbox { margin-right:5px; }
 
-div.openlayers-map #block-openlayers_plus-blockswitcher {
+div.map {
+  position:relative;
+  }
+
+div.map #block-openlayers_plus-blockswitcher {
   position:absolute;
   z-index:3000;
   background:#fff;
-  width:auto;
+  width:200px;
   }
 
-  div.openlayers-map #block-openlayers_plus-blockswitcher.ne { top:0px; right:0px; }
-  div.openlayers-map #block-openlayers_plus-blockswitcher.nw { top:0px; left:0px; }
-  div.openlayers-map #block-openlayers_plus-blockswitcher.se { bottom:0px; right:0px; }
-  div.openlayers-map #block-openlayers_plus-blockswitcher.sw { bottom:0px; left:0px; }
+div.map #block-openlayers_plus-blockswitcher h2.block-title { cursor:pointer; }
+div.map #block-openlayers_plus-blockswitcher div.block-content { display:none; }
 
-div.openlayers-map #block-openlayers_plus-blockswitcher h2.block-title { cursor:pointer; }
-div.openlayers-map #block-openlayers_plus-blockswitcher div.block-content { display:none; }
-
-div.openlayers-map #block-openlayers_plus-blockswitcher div.radio {
-  background: #fff url('inactive.png');
+div.map #block-openlayers_plus-blockswitcher h2.layers-title { 
+  padding:2px 5px;
+  }
+div.map #block-openlayers_plus-blockswitcher div.radio {
+  background: transparent url('inactive.png');
   background-repeat: no-repeat;
   padding: 3px 0 3px 25px;
 }
 
-div.openlayers-map #block-openlayers_plus-blockswitcher div.activated {
-  background: #fff url('active.png');
+div.map #block-openlayers_plus-blockswitcher div.activated {
+  background: transparent url('active.png');
   background-repeat: no-repeat;
   padding: 3px 0 3px 25px;
 }
-
-/**
- * Blocktoggle ========================================================
- */
-div.openlayers-map #block-openlayers_plus-blocktoggle {
-  position:absolute;
-  z-index:3000;
-  background:transparent;
-  width:auto;
-  padding: 0;
-  -moz-border-radius:3px;
-  -webkit-border-radius:3px;
-  }
-
-  div.openlayers-map #block-openlayers_plus-blocktoggle.ne { top:0px; right:0px; }
-  div.openlayers-map #block-openlayers_plus-blocktoggle.nw { top:0px; left:0px; }
-  div.openlayers-map #block-openlayers_plus-blocktoggle.se { bottom:0px; right:0px; }
-  div.openlayers-map #block-openlayers_plus-blocktoggle.sw { bottom:0px; left:0px; }
-
-div.openlayers-map #block-openlayers_plus-blocktoggle h2.block-title { display:none; }
-
-div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-a,
-div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-b {
-  float:left;
-  color:#666;
-  background:url('point-button.png') #fff 5px 50% no-repeat;
-  padding:0px 5px 0px 20px;
-  line-height:20px;
-  width:50px;
-  cursor:pointer;
-  }
-
-div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-a {
-  -moz-border-radius: 3px 0 0 3px;
-  -webkit-border-radius: 3px 0 0 3px;
-  border-right:1px solid #ccc;
-  }
-
-div.openlayers-map #block-openlayers_plus-blocktoggle .openlayers-blocktoggle-b {
-  -moz-border-radius: 0 3px 3px 0;
-  -webkit-border-radius: 0 3px 3px 0;
-  background-image:url('point-choro.png');
-  }
-
-div.openlayers-map #block-openlayers_plus-blocktoggle .activated {
-  background-color:#eee;
-  color:#222;
-  }
