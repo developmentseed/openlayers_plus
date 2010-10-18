@@ -4,7 +4,7 @@
  */
 var OpenLayersPlusBlockswitcher = function(opts) {
     this.map = $(opts[0]).data('map');
-    this.overlay_style = 'checkbox';
+    this.overlay_style = 'radio';
 
     this.blockswitcher = $('div.openlayers-blockswitcher');
     // Don't propagate click events to the map
