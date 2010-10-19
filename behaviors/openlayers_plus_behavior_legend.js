@@ -1,40 +1,29 @@
-var OpenLayersPlusLegend = {};
+var OpenLayersPlusLegend = function(opts) {
+    var self = this;
+    this.map = $(opts[0]).data('map');
 
-OpenLayersPlusLegend = {};
-
-OpenLayersPlusLegend.attach = function(context) {
-  var data = $(context).data('openlayers');
-  if (data && data.map.behaviors.openlayers_plus_behavior_legend) {
-    var layer, i;
-    for (i in data.openlayers.layers) {
-      layer = data.openlayers.layers[i];
-      if (data.map.behaviors.openlayers_plus_behavior_legend[layer.drupalID]) {
-        if (!$('div.openlayers-legends', context).size()) {
-          $(context).append("<div class='openlayers-legends'></div>");
+    this.setLegend = function(layer) {
+        // The layer param may vary based on the context from which we are called.
+        layer = layer.object ? layer.object : layer;
+        if ('legend' in layer) {
+            var legend_content = layer.legend || 'your mother';
+            var legends = $('div.openlayers-legends', self.map.div);
+            if (layer.visibility && !('legendDiv' in layer)) {
+                layer.legendDiv = $("<div class='openlayers-legend'></div>").append(legend_content);
+                legends.append(layer.legendDiv);
+            }
+            else if (!layer.visibility && ('legendDiv' in layer)) {
+                layer.legendDiv.remove();
+                delete layer.legendDiv;
+            }
         }
-        layer.events.register('visibilitychanged', layer, OpenLayersPlusLegend.setLegend);
+    };
 
-        // Trigger the setLegend() method at attach time. We don't know whether
-        // our behavior is being called after the map has already been drawn.
-        OpenLayersPlusLegend.setLegend(layer);
-      }
-    }
-  }
-};
-
-OpenLayersPlusLegend.setLegend = function(layer) {
-  // The layer param may vary based on the context from which we are called.
-  layer = layer.object ? layer.object : layer;
-
-  var name = layer.drupalID;
-  var map = $(layer.map.div);
-  var data = map.data('openlayers');
-  var legend = data.map.behaviors.openlayers_plus_behavior_legend[name];
-  var legends = $('div.openlayers-legends', map);
-  if (layer.visibility && $('#openlayers-legend-'+ name, legends).size() === 0) {
-    legends.append(legend);
-  }
-  else if (!layer.visibility) {
-    $('#openlayers-legend-'+name, legends).remove();
-  }
+    this.map.layers.forEach(function (layer) {
+        if (!$('div.openlayers-legends', self.map.div).size()) {
+            $(self.map.div).append("<div class='openlayers-legends'></div>");
+        }
+        layer.events.register('visibilitychanged', layer, self.setLegend);
+        self.setLegend(layer);
+    });
 };
