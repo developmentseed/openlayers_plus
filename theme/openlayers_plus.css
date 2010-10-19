@@ -53,14 +53,15 @@ div.map #block-openlayers_plus-blockswitcher div.block-content { display:none; }
 div.map #block-openlayers_plus-blockswitcher h2.layers-title { 
   padding:2px 5px;
   }
+
 div.map #block-openlayers_plus-blockswitcher div.radio {
-  background: transparent url('inactive.png');
-  background-repeat: no-repeat;
-  padding: 3px 0 3px 25px;
-}
+  background: transparent url('inactive.png') 0px 0px no-repeat;
+  padding: 3px 0px 3px 25px;
+  min-height:20px; /*IE7*/
+  }
 
 div.map #block-openlayers_plus-blockswitcher div.activated {
-  background: transparent url('active.png');
-  background-repeat: no-repeat;
-  padding: 3px 0 3px 25px;
-}
+  background: transparent url('active.png') 0px 0px no-repeat;
+  padding: 3px 0px 3px 25px;
+  min-height:20px; /*IE7*/
+  }
