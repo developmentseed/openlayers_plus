@@ -19,11 +19,12 @@ var OpenLayersPlusLegend = function(opts) {
         }
     };
 
-    this.map.layers.forEach(function (layer) {
+    for (i in this.map.layers) {
+        var layer = this.map.layers[i];
         if (!$('div.openlayers-legends', self.map.div).size()) {
             $(self.map.div).append("<div class='openlayers-legends'></div>");
         }
         layer.events.register('visibilitychanged', layer, self.setLegend);
         self.setLegend(layer);
-    });
+    }
 };
