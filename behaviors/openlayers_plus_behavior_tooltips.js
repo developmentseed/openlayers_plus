@@ -75,6 +75,9 @@ Drupal.OpenLayersTooltips.getToolTip = function(feature) {
   if (feature.attributes.name) {
     text += "<div class='openlayers-tooltip-name'>" + feature.attributes.name + "</div>";
   }
+  if (feature.attributes.count) {
+    text += "<div class='openlayers-tooltip-count'>" + feature.attributes.count + "</div>";
+  }
   if (feature.attributes.description) {
     text += "<div class='openlayers-tooltip-description'>" + feature.attributes.description + "</div>";
   }
