@@ -175,7 +175,7 @@ class openlayers_plus_behavior_scalepoints extends openlayers_behavior {
     foreach ($layers as $key => $layer) {
       // get type == Vector for backwards-compatibility.
       // TODO: After OpenLayers alpha8 it should be removed
-      if (($layer['type'] == 'Vector' || $layer['vector'] == 1) && !empty($layer['features'])) {
+      if (($layer['type'] == 'Vector' || (isset($layer['vector']) && $layer['vector'] == 1)) && !empty($layer['features'])) {
         $vector_layers[$key] = $layer;
       }
     }
