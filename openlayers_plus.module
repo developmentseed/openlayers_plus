@@ -65,6 +65,7 @@ function openlayers_plus_openlayers_behaviors() {
   return array(
     'openlayers_plus_behavior_blockswitcher' => array(
       'title' => t('OL+: Blockswitcher'),
+      'description' => t('A clone of LayerSwitcher, with better themability and positioning via the Drupal block system.'),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_blockswitcher.inc',
@@ -74,6 +75,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_blocktoggle' => array(
       'title' => t('OL+: Blocktoggle'),
+      'description' => t('A version of BlockSwitcher that toggles between two different layers only. Useful for situations in which layers represent the same data in slightly different ways.'),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_blocktoggle.inc',
@@ -83,6 +85,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_legend' => array(
       'title' => t('OL+: Map legend'),
+      'description' => t('A block in a corner of a map that provides information on layers.'),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_legend.inc',
@@ -92,6 +95,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_permalink' => array(
       'title' => t('OL+: Permalink'),
+      'description' => t('A version of Permalink optimized to persist layers between pages with different layer setups and without explicitly using the control.'),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_permalink.inc',
@@ -101,6 +105,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_scalepoints' => array(
       'title' => t('OL+: Scalepoints'),
+      'description' => t('Dynamic styling, changing point radii based on a certain value.'),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_scalepoints.inc',
@@ -110,6 +115,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_tooltips' => array(
       'title' => t('OL+: Tooltips'),
+      'description' => t('An interaction with point-based maps that results in following links on hover.'),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_tooltips.inc',
@@ -119,6 +125,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_popup' => array(
       'title' => t('OL+: Popups'),
+      'description' => t('An interaction with point-based, clustered maps that allows clicking on points that results in scanning between items.'),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' =>  'openlayers_plus_behavior_popup.inc',
