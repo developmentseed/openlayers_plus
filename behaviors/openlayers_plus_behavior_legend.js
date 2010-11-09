@@ -1,6 +1,9 @@
 var OpenLayersPlusLegend = function(opts) {
+    if (opts == null) {
+        return;
+    }
     var self = this;
-    this.map = $(opts[0]).data('map');
+    this.map = $(opts).data('map');
 
     this.setLegend = function(layer) {
         // The layer param may vary based on the context from which we are called.
