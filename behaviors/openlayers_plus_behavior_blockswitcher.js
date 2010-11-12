@@ -2,12 +2,12 @@
 /**
  * Initializes the blockswitcher and attaches to DOM elements.
  */
-var OpenLayersPlusBlockswitcher = function(opts) {
+var OpenLayersPlusBlockswitcher = function(opts, overlay_style) {
     if (opts == null) {
         return;
     }
     this.map = $(opts).data('map');
-    this.overlay_style = 'radio';
+    this.overlay_style = overlay_style || 'radio';
 
     this.blockswitcher = $('div.openlayers-blockswitcher');
     // Don't propagate click events to the map
