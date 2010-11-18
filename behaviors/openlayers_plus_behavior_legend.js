@@ -19,6 +19,7 @@ var OpenLayersPlusLegend = function(opts) {
                 layer.legendDiv.remove();
                 delete layer.legendDiv;
             }
+            $(opts).trigger('openlayersPlusLegendChange');
         }
     };
 
