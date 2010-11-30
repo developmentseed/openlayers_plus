@@ -1,6 +1,7 @@
 /**
  * Implementation of Drupal behavior.
  */
+(function($) {
 Drupal.behaviors.openlayers_plus_behavior_legend = {
   'attach': function(context, settings) {
     Drupal.OpenLayersPlusLegend.attach(context);
@@ -45,3 +46,4 @@ Drupal.OpenLayersPlusLegend.setLegend = function(layer) {
     $('#openlayers-legend-'+name, legends).remove();
   }
 };
+})(jQuery);
