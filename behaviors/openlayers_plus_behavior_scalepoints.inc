@@ -33,14 +33,14 @@ class openlayers_plus_behavior_scalepoints extends openlayers_behavior {
     $form['min'] = array(
       '#tree' => TRUE,
       '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
+      '#collapsed' => FALSE,
       '#type' => 'fieldset',
       '#title' => t('Minimum values'),
     );
     $form['max'] = array(
       '#tree' => TRUE,
       '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
+      '#collapsed' => FALSE,
       '#type' => 'fieldset',
       '#title' => t('Maximum values'),
     );
