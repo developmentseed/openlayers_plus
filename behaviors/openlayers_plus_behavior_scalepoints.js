@@ -11,21 +11,22 @@ Drupal.behaviors.openlayers_plus_behavior_scalepoints = {
       var vector_layers = [];
       for (var key in data.openlayers.layers) {
         var layer = data.openlayers.layers[key];
-        if (layer.isVector === true) {
+        // TODO: isVector appears to be spotty (aka OpenLayers doesn't
+        // consistently support it. This approach is less exact, and 
+        // should be replaced
+        if (layer.__proto__.CLASS_NAME === 'OpenLayers.Layer.Vector') {
           var styleMap = layer.styleMap;
           styleMap.addUniqueValueRules("default", "weight", styles);
           layer.redraw();
           vector_layers.push(layer);
         }
       }
-      /**
-       * This attempts to fix a problem in IE7 in which points
-       * are not displayed until the map is moved. 
-       *
-       * Since namespaces is filled neither on window.load nor
-       * document.ready, and testing it is unsafe, this renders
-       * map layers after 500 milliseconds.
-       */
+      // This attempts to fix a problem in IE7 in which points
+      // are not displayed until the map is moved. 
+      //
+      // Since namespaces is filled neither on window.load nor
+      // document.ready, and testing it is unsafe, this renders
+      // map layers after 500 milliseconds.
       if($.browser.msie) {
         setTimeout(function() {
           $.each(data.openlayers.getLayersByClass('OpenLayers.Layer.Vector'),
