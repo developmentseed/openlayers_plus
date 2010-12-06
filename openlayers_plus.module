@@ -36,24 +36,46 @@ function openlayers_plus_theme() {
       'file' => 'theme.inc',
     ),
     'openlayers_plus_blocktoggle' => array(
-      'arguments' => array('a_label' => '', 'b_label' => ''),
+      'arguments' => array(
+        'a_label' => '',
+        'b_label' => ''),
       'path' => drupal_get_path('module', 'openlayers_plus') . '/theme',
       'template' => 'openlayers-plus-blocktoggle',
       'file' => 'theme.inc',
     ),
     'openlayers_plus_legend_raw' => array(
-      'arguments' => array('raw' => '', 'layer' => array(), 'layer_id' => array()),
+      'arguments' => array(
+        'raw' => '',
+        'layer' => array(),
+        'layer_id' => array()),
       'path' => drupal_get_path('module', 'openlayers_plus') . '/theme',
       'template' => 'openlayers-plus-legend-raw',
       'file' => 'theme.inc',
     ),
     'openlayers_plus_legend' => array(
-      'arguments' => array('legend' => array(), 'layer' => array(), 'layer_id' => array()),
+      'arguments' => array(
+        'legend' => array(),
+        'layer' => array(),
+        'layer_id' => array()),
       'path' => drupal_get_path('module', 'openlayers_plus') . '/theme',
       'template' => 'openlayers-plus-legend',
       'file' => 'theme.inc',
     ),
   );
+}
+
+/**
+ * Implementation of hook_ctools_plugin_api().
+ */
+function openlayers_plus_ctools_plugin_api($module, $api) {
+  if ($module == "openlayers") {
+    switch ($api) {
+      case 'openlayers_layers':
+        return array('version' => 1);
+      case 'openlayers_styles':
+        return array('version' => 1);
+    }
+  }
 }
 
 /**
@@ -65,6 +87,7 @@ function openlayers_plus_openlayers_behaviors() {
   return array(
     'openlayers_plus_behavior_blockswitcher' => array(
       'title' => t('OL+: Blockswitcher'),
+      'description' => t(''),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_blockswitcher.inc',
@@ -74,6 +97,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_blocktoggle' => array(
       'title' => t('OL+: Blocktoggle'),
+      'description' => t(''),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_blocktoggle.inc',
@@ -83,6 +107,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_legend' => array(
       'title' => t('OL+: Map legend'),
+      'description' => t(''),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_legend.inc',
@@ -92,6 +117,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_permalink' => array(
       'title' => t('OL+: Permalink'),
+      'description' => t(''),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_permalink.inc',
@@ -101,6 +127,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_scalepoints' => array(
       'title' => t('OL+: Scalepoints'),
+      'description' => t(''),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_scalepoints.inc',
@@ -110,6 +137,10 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_tooltips' => array(
       'title' => t('OL+: Tooltips'),
+      'description' => t(''),
+      'type' => 'layer',
+      'file' => 'openlayers_plus_behavior_tooltips.inc',
+      'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' => 'openlayers_plus_behavior_tooltips.inc',
@@ -119,6 +150,7 @@ function openlayers_plus_openlayers_behaviors() {
     ),
     'openlayers_plus_behavior_popup' => array(
       'title' => t('OL+: Popups'),
+      'description' => t(''),
       'behavior' => array(
         'path' => drupal_get_path('module', 'openlayers_plus') .'/behaviors',
         'file' =>  'openlayers_plus_behavior_popup.inc',

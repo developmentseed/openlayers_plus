@@ -6,7 +6,11 @@ class openlayers_plus_behavior_blockswitcher extends openlayers_behavior {
    */
   function options_init() {
     $options = parent::options_init();
-    $options['map'] = array('enabled' => FALSE, 'position' => 'se');
+    $options['map'] = array(
+      'enabled' => FALSE,
+      'open' => TRUE,
+      'overlay_style' => 'checkbox',
+      'position' => 'se');
     return $options;
   }
 
@@ -54,7 +58,10 @@ class openlayers_plus_behavior_blockswitcher extends openlayers_behavior {
     drupal_add_js(drupal_get_path('module', 'openlayers_plus') 
       .'/behaviors/openlayers_plus_behavior_blockswitcher.js');
     if ($this->options['map']['enabled']) {
-      $block = (object) module_invoke('openlayers_plus', 'block', 'view', 'blockswitcher');
+      $block = (object) module_invoke('openlayers_plus',
+        'block',
+        'view',
+        'blockswitcher');
       $block->module = 'openlayers_plus';
       $block->delta = 'blockswitcher';
       $this->options['block'] = theme('block', $block);
