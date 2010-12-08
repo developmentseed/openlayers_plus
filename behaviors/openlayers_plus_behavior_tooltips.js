@@ -64,8 +64,8 @@ Drupal.OpenLayersTooltips.click = function(feature) {
   if ($(html).is('a')) {
     link = $(html);
   }
-  else if ($(html).children('a').size() > 0) {
-    link = $(html).children('a')[0];
+  else if ($('a', html).size() > 0) {
+    link = $('a', html);
   }
   if (link) {
     var href = $(link).attr('href');
@@ -95,7 +95,6 @@ Drupal.OpenLayersTooltips.getToolTip = function(feature) {
 
 Drupal.OpenLayersTooltips.select = function(feature) {
   var tooltip = Drupal.OpenLayersTooltips.getToolTip(feature);
-  console.log(tooltip);
   $(feature.layer.map.div).append(tooltip);
 };
 
