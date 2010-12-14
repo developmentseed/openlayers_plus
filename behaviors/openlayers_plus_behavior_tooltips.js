@@ -12,9 +12,13 @@ Drupal.OpenLayersTooltips = {};
 
 Drupal.OpenLayersTooltips.attach = function(context) {
   var data = $(context).data('openlayers');
-
   var isVector = function(layer) {
-    return layer.__proto__.CLASS_NAME === 'OpenLayers.Layer.Vector';
+    if (layer.__proto__) {
+      return layer.__proto__.CLASS_NAME === 'OpenLayers.Layer.Vector';
+    }
+    else if (layer.CLASS_NAME) {
+      return layer.CLASS_NAME === 'OpenLayers.Layer.Vector';
+    }
   };
 
   if (data && data.map.behaviors.openlayers_plus_behavior_tooltips) {
