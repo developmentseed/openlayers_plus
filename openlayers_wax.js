@@ -62,7 +62,7 @@ var OpenLayersWax = {
      */
     bind: function() {
         var element = _(arguments).last();
-        $.getJSON($(element).attr('src'), function(data) {
+        OpenLayersWax.getWax($(element).attr('src'), function(data) {
             data.map && $(element).data('map',
                 new OpenLayers.Map(element, OpenLayersWax.reify(data.map)));
             var degrees = new OpenLayers.LonLat(0, 0);
@@ -75,5 +75,25 @@ var OpenLayersWax = {
                 OpenLayersWax.reify(data.externals));
             $(element).trigger('openlayersWaxFinished');
         });
+    },
+
+    /**
+     * Fetch JSON data from the server. Uses JSONP for cross domain
+     * requests.
+     *
+     * Cross domain requests require the inclusion of jquery.jsonp-2.1.4.js.
+     */
+    getWax: function(url, callback) {
+        if (url.match(/http/)) {
+            $.jsonp({
+                url: url,
+                success: callback,
+                error: function() {},
+                callbackParameter: 'callback'
+            });
+        }
+        else {
+            $.getJSON(url, callback);
+        }
     }
 };
