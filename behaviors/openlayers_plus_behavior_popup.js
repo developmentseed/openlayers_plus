@@ -7,7 +7,7 @@ Drupal.behaviors.openlayers_plus_behavior_popup = {
     var vector_layers = [];
     for (var key in data.openlayers.layers) {
       var layer = data.openlayers.layers[key];
-      if (layer.isVector === true) {
+      if (layer.isVector === true || layer.CLASS_NAME == "OpenLayers.Layer.Vector") {
         vector_layers.push(layer);
       }
     }
